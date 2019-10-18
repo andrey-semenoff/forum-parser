@@ -7,4 +7,6 @@ $forum = new \App\ForumoduaSite($config, new \App\ForumoduaParser());
 
 $login_result = $forum->login();
 
-echo($login_result);
+//var_dump($login_result);
+
+$forum->parse();
