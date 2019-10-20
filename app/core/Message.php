@@ -1,5 +1,5 @@
 <?php
-namespace app;
+namespace Core;
 
 class Message
 {

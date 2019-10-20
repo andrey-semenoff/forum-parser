@@ -3,7 +3,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 $config = require __DIR__ . '/config/config.php';
 
-$forum = new \App\ForumoduaSite($config, new \App\ForumoduaParser());
+$forum = new \Core\ForumoduaSite($config, new \Core\ForumoduaParser());
 
 $login_result = $forum->login();
 

@@ -1,7 +1,8 @@
 <?php
-namespace App;
+namespace Core;
 
 use PHPHtmlParser\Dom;
+use stringEncode\Exception;
 
 class ForumoduaParser implements Parser
 {
@@ -72,7 +73,7 @@ class ForumoduaParser implements Parser
         foreach ($parsed_html['messages'] as $message_html) {
             $message = $this->parseMessage($message_html);
             if( !empty($message) ) {
-                // TODO: add Producer & Cunsumer interfaces, create classes
+                // TODO: add Producer & Consumer interfaces, create classes
                 // send Messages via RabbitMQ
                 var_dump(new Message($parsed_html['topic'], $message['author'], $message['date'], $message['text']));
             }
@@ -86,7 +87,7 @@ class ForumoduaParser implements Parser
         }
 
         return [
-            'author' => $message_html->find('.username strong')->text,
+            'author' => strip_tags($message_html->find('.username')->innerHTML),
             'date' => str_replace('&nbsp;', '', $message_html->find('.posthead .date')->text),
             'text' => trim($message_html->find('.postcontent')->text),
         ];
@@ -110,6 +111,8 @@ class ForumoduaParser implements Parser
             if( count($pages_nums) === 1 ) {
                 $pages_nums[] = $pages_nums[0];
             }
+        } else {
+            die('Pages value in topic of each site should be an array!');
         }
 
         return $pages_nums;
