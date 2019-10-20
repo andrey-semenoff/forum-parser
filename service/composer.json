@@ -1,0 +1,17 @@
+{
+    "name": "hys/forum-parser-service",
+    "authors": [
+        {
+            "name": "Andrey Semenov",
+            "email": "andrey.semenoff@gmail.com"
+        }
+    ],
+    "require": {
+        "php-amqplib/php-amqplib": "^2.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/"
+        }
+    }
+}
