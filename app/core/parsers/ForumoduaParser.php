@@ -6,6 +6,13 @@ use stringEncode\Exception;
 
 class ForumoduaParser implements Parser
 {
+    private $producer;
+
+    public function __construct(Producer $producer)
+    {
+        $this->producer = $producer;
+    }
+
     public function parse(array $topics)
     {
         foreach ($topics as $topic) {
@@ -73,9 +80,8 @@ class ForumoduaParser implements Parser
         foreach ($parsed_html['messages'] as $message_html) {
             $message = $this->parseMessage($message_html);
             if( !empty($message) ) {
-                // TODO: add Producer & Consumer interfaces, create classes
                 // send Messages via RabbitMQ
-                var_dump(new Message($parsed_html['topic'], $message['author'], $message['date'], $message['text']));
+                $this->producer->send(new Message($parsed_html['topic'], $message['author'], strtotime($message['date']), $message['text']));
             }
         }
     }

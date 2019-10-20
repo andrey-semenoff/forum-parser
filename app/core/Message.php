@@ -8,7 +8,7 @@ class Message
     public $date;
     public $text;
 
-    public function __construct(string $topic, string $author, string $date, string $text)
+    public function __construct(string $topic, string $author, int $date, string $text)
     {
         $this->topic = $topic;
         $this->author = $author;
