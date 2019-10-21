@@ -9,7 +9,7 @@ $forum = new \Core\ForumoduaSite($config, $parser);
 
 $login_result = $forum->login();
 
-//var_dump($login_result);
+var_dump($login_result);
 
 $forum->parse();
 
